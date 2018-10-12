@@ -1,0 +1,15 @@
+language: php
+
+php:
+  - 7.2
+
+before_script:
+  - cp src/.env.testing src/.env
+
+
+install:
+  - composer install -d src --prefer-source --no-interaction --dev
+
+script:
+  - php src/vendor/bin/phpunit -c src/
+

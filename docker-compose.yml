@@ -1,0 +1,17 @@
+version: "3"
+
+services:
+  webserver:
+    build: .
+    ports:
+      - "8080:8080"
+    networks:
+      - backend
+    environment:
+      - APP_ENV=local
+      - APP_URL=sloth.sqroot.eu
+    volumes:
+      - ./src:/var/www/
+
+networks:
+  backend:
