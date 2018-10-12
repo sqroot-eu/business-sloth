@@ -12,7 +12,7 @@ before_script:
 
 install:
   - composer install -d src --prefer-source --no-interaction --dev
-  - cd src && npm install
+  - cd src && npm install && cd ..
 
 script:
   - php src/vendor/bin/phpunit -c src/
