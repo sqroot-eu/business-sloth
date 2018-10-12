@@ -44,7 +44,6 @@
         methods: {
             onSubmit (evt) {
                 evt.preventDefault();
-                alert(this.form.name)
                 axios.get('/api/grade/sqrooted')
                     .then(response => {
                         this.grade = response.data.data.grade;

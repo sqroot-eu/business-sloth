@@ -45052,7 +45052,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             var _this = this;
 
             evt.preventDefault();
-            alert(this.form.name);
             axios.get('/api/grade/sqrooted').then(function (response) {
                 _this.grade = response.data.data.grade;
             });

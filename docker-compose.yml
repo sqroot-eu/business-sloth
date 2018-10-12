@@ -12,6 +12,7 @@ services:
       - APP_URL=sloth.sqroot.eu
     volumes:
       - ./src:/var/www/
+    user: "10000"
 
 networks:
   backend:
