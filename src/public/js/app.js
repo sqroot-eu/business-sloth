@@ -45030,6 +45030,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -45066,6 +45071,26 @@ var render = function() {
   return _c("div", { staticClass: "container" }, [
     _c("div", { staticClass: "row justify-content-center" }, [
       _c("div", { staticClass: "col-md-8" }, [
+        _c("img", {
+          attrs: {
+            src:
+              "https://www.publicdomainpictures.net/pictures/190000/velka/sloth-drawing.jpg",
+            width: "300"
+          }
+        }),
+        _vm._v(" "),
+        _c("p", { staticClass: "lead" }, [
+          _vm._v(
+            "As Business Sloth, I have relevant experience on how businessmen express themselves.\n            One must use a plethora of complex business-lingo."
+          )
+        ]),
+        _vm._v(" "),
+        _c("p", [
+          _vm._v(
+            "Think you are worthy of joining our exclusive enterprise? Enter your Twitter username and we shall see..."
+          )
+        ]),
+        _vm._v(" "),
         _c("div", { staticClass: "card card-default" }, [
           _c("div", { staticClass: "card-header" }, [_vm._v("The Sloth Test")]),
           _vm._v(" "),
@@ -45109,7 +45134,7 @@ var render = function() {
                     {
                       attrs: { type: "submit", size: "lg", variant: "primary" }
                     },
-                    [_vm._v("Assess")]
+                    [_vm._v("Submit CV")]
                   )
                 ],
                 1
