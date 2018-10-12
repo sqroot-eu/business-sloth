@@ -45035,6 +45035,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -45139,7 +45140,13 @@ var render = function() {
                 1
               ),
               _vm._v(" "),
-              _c("h1", [_vm._v(_vm._s(_vm.grade))])
+              _c("p", { staticClass: "lead" }, [
+                _vm._v(
+                  "Your recent Twitter history indicates that you are much businessman. You WoW the board with your vocabulary\n                        every time you speak and leave developers confuzzled on what you actually said (you scored " +
+                    _vm._s(_vm.grade) +
+                    " points on Business-o-Meter)."
+                )
+              ])
             ],
             1
           )

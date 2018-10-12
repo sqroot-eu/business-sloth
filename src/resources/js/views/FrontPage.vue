@@ -22,7 +22,8 @@
                         </b-form>
 
 
-                        <h1>{{ grade }}</h1>
+                        <p class="lead">Your recent Twitter history indicates that you are much businessman. You WoW the board with your vocabulary
+                            every time you speak and leave developers confuzzled on what you actually said (you scored {{ grade }} points on Business-o-Meter).</p>
                     </div>
                 </div>
             </div>
