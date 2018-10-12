@@ -1,4 +1,7 @@
 language: php
+sudo: required
+services:
+  - docker
 
 php:
   - 7.2
@@ -9,7 +12,17 @@ before_script:
 
 install:
   - composer install -d src --prefer-source --no-interaction --dev
+  - cd src && npm install
 
 script:
   - php src/vendor/bin/phpunit -c src/
+  - docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
+  - export TAG=`if [ "$TRAVIS_BRANCH" == "master" ]; then echo "latest"; else echo $TRAVIS_BRANCH | tr / - ; fi`
+  - docker build -t sqroot/business-sloth:$TAG .
 
+after_success:
+  - docker push sqroot/business-sloth:$TAG
+  - docker rmi sqroot/business-sloth:$TAG
+
+after_script:
+  - docker logout
