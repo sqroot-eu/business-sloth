@@ -9,5 +9,6 @@ return [
 
         base_path('resources/dict/custom.php'),
         base_path('resources/dict/reedes.php')
-    ]
+    ],
+    'tweet_count'=>10
 ];

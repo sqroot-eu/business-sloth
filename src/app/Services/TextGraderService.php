@@ -2,18 +2,19 @@
 
 namespace App\Services;
 
+use App\Model\TextScore;
+
 class TextGraderService
 {
     protected $paths;
     protected $dictionary = [];
 
-    /**
-     * TextGraderService constructor.
-     */
+
     public function __construct(array $paths)
     {
         $this->paths = $paths;
     }
+
 
 
     public function score($text)
@@ -21,13 +22,16 @@ class TextGraderService
         if (!$this->loaded()) {
             $this->load($this->paths);
         }
-        $score = 0;
+
+        $textScore = new TextScore($text);
+
         foreach ($this->dictionary as $term) {
             if (mb_stristr($text, $term)) {
-                $score += 1;
+                $textScore->addPhrase($term);
             }
         }
-        return $score;
+
+        return $textScore;
 
     }
 

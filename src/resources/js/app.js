@@ -15,6 +15,8 @@ window.Vue = require('vue');
 Vue.use(VueRouter);
 Vue.use(BootstrapVue);
 
+Vue.component('tweet-score', require('./components/TweetScore'));
+
 const router = new VueRouter({
     mode: 'hash',
     routes: routes,

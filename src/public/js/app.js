@@ -20250,6 +20250,8 @@ window.Vue = __webpack_require__(218);
 Vue.use(__WEBPACK_IMPORTED_MODULE_0_vue_router__["a" /* default */]);
 Vue.use(__WEBPACK_IMPORTED_MODULE_2_bootstrap_vue__["a" /* default */]);
 
+Vue.component('tweet-score', __webpack_require__(226));
+
 var router = new __WEBPACK_IMPORTED_MODULE_0_vue_router__["a" /* default */]({
     mode: 'hash',
     routes: __WEBPACK_IMPORTED_MODULE_1__routes__["a" /* default */]
@@ -45036,6 +45038,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -45044,17 +45049,25 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             form: {
                 name: ''
             },
-            grade: null
+            loading: false,
+            grade: null,
+            formState: null
         };
     },
 
     methods: {
         onSubmit: function onSubmit(evt) {
-            var _this = this;
-
             evt.preventDefault();
-            axios.get('/api/grade/sqrooted').then(function (response) {
-                _this.grade = response.data.data.grade;
+            this.loading = true;
+            var that = this;
+            axios.get('/api/grade/' + this.form.name).then(function (response) {
+                that.grade = response.data.data;
+                that.loading = false;
+                that.formState = null;
+            }, function (error) {
+                that.loading = false;
+                that.formState = 'invalid';
+                that.grade = null;
             });
         }
     }
@@ -45069,45 +45082,26 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "container" }, [
+    _vm._m(0),
+    _vm._v(" "),
     _c("div", { staticClass: "row justify-content-center" }, [
-      _c("div", { staticClass: "col-md-8" }, [
-        _c("img", {
-          attrs: {
-            src:
-              "https://www.publicdomainpictures.net/pictures/190000/velka/sloth-drawing.jpg",
-            width: "300"
-          }
-        }),
-        _vm._v(" "),
-        _c("p", { staticClass: "lead" }, [
-          _vm._v(
-            "As Business Sloth, I have relevant experience on how businessmen express themselves.\n            One must use a plethora of complex business-lingo."
-          )
-        ]),
-        _vm._v(" "),
-        _c("p", [
-          _vm._v(
-            "Think you are worthy of joining our exclusive enterprise? Enter your Twitter username and we shall see..."
-          )
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "card card-default" }, [
-          _c("div", { staticClass: "card-header" }, [_vm._v("The Sloth Test")]),
-          _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "col-md-10 offset-md-1" },
+        [
           _c(
-            "div",
-            { staticClass: "card-body" },
+            "b-form",
+            { on: { submit: _vm.onSubmit } },
             [
               _c(
-                "b-form",
-                { attrs: { inline: "" }, on: { submit: _vm.onSubmit } },
+                "b-form-group",
+                {
+                  attrs: {
+                    state: _vm.formState,
+                    "invalid-feedback": "No such sloth found!"
+                  }
+                },
                 [
-                  _c(
-                    "label",
-                    { staticClass: "sr-only", attrs: { for: "twitter-name" } },
-                    [_vm._v("Twitter name")]
-                  ),
-                  _vm._v(" "),
                   _c(
                     "b-input-group",
                     {
@@ -45116,7 +45110,11 @@ var render = function() {
                     },
                     [
                       _c("b-input", {
-                        attrs: { id: "twitter-name", placeholder: "SQRooted" },
+                        attrs: {
+                          id: "twitter-name",
+                          autofocus: "",
+                          placeholder: "SQRooted"
+                        },
                         model: {
                           value: _vm.form.name,
                           callback: function($$v) {
@@ -45124,38 +45122,70 @@ var render = function() {
                           },
                           expression: "form.name"
                         }
-                      })
+                      }),
+                      _vm._v(" "),
+                      _c(
+                        "b-button",
+                        {
+                          attrs: {
+                            type: "submit",
+                            size: "lg",
+                            variant: "primary"
+                          }
+                        },
+                        [_vm._v("Submit CV")]
+                      )
                     ],
                     1
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "b-button",
-                    {
-                      attrs: { type: "submit", size: "lg", variant: "primary" }
-                    },
-                    [_vm._v("Submit CV")]
                   )
                 ],
                 1
-              ),
-              _vm._v(" "),
-              _c("p", { staticClass: "lead" }, [
-                _vm._v(
-                  "Your recent Twitter history indicates that you are much businessman. You WoW the board with your vocabulary\n                        every time you speak and leave developers confuzzled on what you actually said (you scored " +
-                    _vm._s(_vm.grade) +
-                    " points on Business-o-Meter)."
-                )
-              ])
+              )
             ],
             1
+          )
+        ],
+        1
+      )
+    ]),
+    _vm._v(" "),
+    _vm.grade && !_vm.loading
+      ? _c("div", { staticClass: "row justify-content-center" }, [
+          _c(
+            "div",
+            { staticClass: "col-md-10 offset-md-1" },
+            [_c("tweet-score", { attrs: { grade: _vm.grade } })],
+            1
+          )
+        ])
+      : _vm._e()
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "row justify-content-center" }, [
+      _c("div", { staticClass: "col-md-10 offset-md-1" }, [
+        _c("img", {
+          staticClass: "mx-auto d-block header-img",
+          attrs: {
+            src:
+              "https://www.publicdomainpictures.net/pictures/190000/velka/sloth-drawing.jpg",
+            width: "300"
+          }
+        }),
+        _vm._v(" "),
+        _c("p", { staticClass: "lead text-center" }, [
+          _vm._v(
+            "\n                Enter your Twitter handle to find out if you're worthy of joining the Business Sloth Enterprise.\n            "
           )
         ])
       ])
     ])
-  ])
-}
-var staticRenderFns = []
+  }
+]
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
@@ -67306,6 +67336,101 @@ if (false) {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 224 */,
+/* 225 */,
+/* 226 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(43)
+/* script */
+var __vue_script__ = __webpack_require__(228)
+/* template */
+var __vue_template__ = __webpack_require__(227)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/js/components/TweetScore.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-31f8dacc", Component.options)
+  } else {
+    hotAPI.reload("data-v-31f8dacc", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 227 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _c("h1", { staticClass: "text-center" }, [
+      _vm._v(
+        "Your recent tweets used " +
+          _vm._s(_vm.grade.grade) +
+          " business terms."
+      )
+    ])
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-31f8dacc", module.exports)
+  }
+}
+
+/***/ }),
+/* 228 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    props: ['grade']
+});
 
 /***/ })
 /******/ ]);

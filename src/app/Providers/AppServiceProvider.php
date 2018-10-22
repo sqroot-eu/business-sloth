@@ -2,7 +2,7 @@
 
 namespace App\Providers;
 
-use Illuminate\Support\Facades\URL;
+use App\Services\TextGraderService;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -27,6 +27,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        $this->app->bind(TextGraderService::class, function ($app) {
+            return new TextGraderService(config('sloth.dictionaries'));
+        });
     }
 }
